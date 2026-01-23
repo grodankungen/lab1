@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Vehicle implements Movable{
+public class Vehicle implements Movable {
     private double currentSpeed;
     private Color color;
     private final String modelName;
@@ -21,7 +21,7 @@ public class Vehicle implements Movable{
     }
 
     // Getters
-    public double getCurrentSpeed(){
+    public double getCurrentSpeed() {
         return currentSpeed;
     }
 
