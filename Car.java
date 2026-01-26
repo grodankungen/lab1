@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Car extends Vehicle {
+abstract class Car extends Vehicle {
     private final int nrDoors;
     private final double enginePower;
 
@@ -11,22 +11,36 @@ public class Car extends Vehicle {
         stopEngine();
     }
 
-
-    protected void startEngine() {
+    public void startEngine() {
         setCurrentSpeed(0.1);
     }
 
-    protected void stopEngine() {
+    public void stopEngine() {
         setCurrentSpeed(0);
     }
 
+    public void gas(double amount) {
+        if (amount >= 0 && amount <= 1) {
+            incrementSpeed(amount);
+        }
+    }
 
-    // Getters
+    public void brake(double amount) {
+        if (amount >= 0 && amount <= 1) {
+            decrementSpeed(amount);
+        }
+    }
+
     public int getNrDoors() {
         return nrDoors;
     }
 
     public double getEnginePower() {
         return enginePower;
+    }
+
+    @Override
+    protected void setCurrentSpeed(double speed) {
+        super.setCurrentSpeed(Math.max(0, Math.min(speed, enginePower)));  // in interval [0, enginePower]
     }
 }
