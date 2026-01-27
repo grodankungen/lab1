@@ -30,7 +30,18 @@ class Volvo240Test {
     }
 
     @Test
-    void gas() {
+    void gasReachesPowerLimit() {
+
+        //gas that shii up
+        for (int i = 0; i < 1000000; i++) {
+            volvo.gas(1);
+        }
+
+        double exp = volvo.getEnginePower();
+        double real =  volvo.getCurrentSpeed();
+
+        assertEquals(exp, real);
+
     }
 
     @Test
