@@ -43,4 +43,14 @@ abstract class Car extends Vehicle {
     protected void setCurrentSpeed(double speed) {
         super.setCurrentSpeed(Math.max(0, Math.min(speed, enginePower)));  // in interval [0, enginePower]
     }
+
+    private void incrementSpeed(double amount) {
+        setCurrentSpeed(Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower()));
+    }
+
+    private void decrementSpeed(double amount) {
+        setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount, 0));
+    }
+
+    protected abstract double speedFactor();
 }

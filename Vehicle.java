@@ -28,8 +28,4 @@ abstract class Vehicle extends MovableObject {
     protected void setCurrentSpeed(double speed) {
         this.currentSpeed = Math.max(speed, 0);
     }
-
-    protected abstract void incrementSpeed(double amount);
-
-    protected abstract void decrementSpeed(double amount);
 }
