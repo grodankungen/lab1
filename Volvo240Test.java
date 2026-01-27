@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class Volvo240Test {
@@ -39,6 +41,11 @@ class Volvo240Test {
 
     @Test
     void setColor() {
+        volvo.setColor(Color.red);
+
+        Color expected = Color.red;
+        Color actual = volvo.getColor();
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -47,9 +54,24 @@ class Volvo240Test {
 
     @Test
     void turnLeft() {
+        double angle = volvo.getAngle();
+        volvo.turnLeft(90);
+
+        double expected = angle + 90;
+        double actual = volvo.getAngle();
+        assertEquals(expected, actual);
     }
 
     @Test
     void turnRight() {
+        double angle = volvo.getAngle();
+        volvo.turnRight(90);
+
+        double expected = angle - 90;
+        if (expected < 0) {
+            expected += 360;
+        }
+        double actual = volvo.getAngle();
+        assertEquals(expected, actual);
     }
 }
