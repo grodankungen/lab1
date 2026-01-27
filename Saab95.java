@@ -5,7 +5,7 @@ public class Saab95 extends Car{
     public boolean turboOn;
 
     public Saab95(){
-        super(2, Color.red, 125, "Saab95", 0);
+        super(2, Color.red, 125, "Saab95", 0, new Vector2(1,200));
 	    turboOn = false;
     }
 
@@ -17,18 +17,10 @@ public class Saab95 extends Car{
 	    turboOn = false;
     }
     
-    public double speedFactor(){
+    protected double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
-    }
-
-    public void incrementSpeed(double amount){
-        super.incrementSpeed(speedFactor() * amount);
-    }
-
-    public void decrementSpeed(double amount){
-        super.decrementSpeed(speedFactor() * amount);
     }
     
     // TODO fix this method according to lab pm

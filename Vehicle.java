@@ -4,19 +4,20 @@ public abstract class Vehicle extends Movable_Object{
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private String modelName; // The car model name
-    private Vector3 direction;
+    private Vector2 direction;
 
-    public Vehicle(double currentSpeed, Color color, String modelName, Vector3 direction){
-        super(new Vector3(0,0,0), new Vector3(0, 0,0));
+    public Vehicle(double currentSpeed, Color color, String modelName, Vector2 direction){
+        super();
         this.currentSpeed = currentSpeed;
         this.color = color;
         this.modelName = modelName;
-        this.direction = new Vector3(0, 0, 0);
+        this.direction = direction;
         this.update_speed();
     }
 
     private void update_speed(){
-        this.set_velocity(direction);
+        direction.normalize();
+        this.set_velocity(direction.x(), direction.y());
         this.velocity().scale(currentSpeed);
     }
 
@@ -26,7 +27,7 @@ public abstract class Vehicle extends Movable_Object{
         super.tick();
     }
 
-    public void set_direction(Vector3 direction){
+    private void set_direction(Vector2 direction){
         this.direction = direction;
     }
 
@@ -35,11 +36,12 @@ public abstract class Vehicle extends Movable_Object{
     }
 
     protected void decrementSpeed(double amount){
-        set_speed(Math.max(this.currentSpeed + amount, 0));
+        set_speed(Math.max(this.currentSpeed - amount, 0));
     }
 
-    public void set_speed(double speed) {
+    private void set_speed(double speed) {
         currentSpeed = speed;
+        update_speed();
     }
 
     public double getCurrentSpeed(){
@@ -54,14 +56,17 @@ public abstract class Vehicle extends Movable_Object{
         color = clr;
     }
 
-    @Override
-    public void turnLeft(){
-
+    public void turnLeft(double angle){
+        if (angle > 0){
+            this.direction.turn(angle);
+            this.update_speed();
+        }
     }
-
-    @Override
-    public void turnRight(){
-
+    public void turnRight(double angle){
+        if (angle > 0){
+            this.direction.turn(-angle);
+            this.update_speed();
+        }
     }
 
 }
