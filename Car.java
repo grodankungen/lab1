@@ -23,6 +23,7 @@ abstract class Car extends Vehicle {
         if (amount >= 0 && amount <= 1) {
             incrementSpeed(amount);
         }
+
     }
 
     public void brake(double amount) {

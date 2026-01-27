@@ -13,6 +13,9 @@ class Volvo240Test {
         this.volvo = new Volvo240();
     }
 
+    /**
+     * Tests that the startEngine method increases speed as expected
+     */
     @Test
     void startEngine() {
         double startingSpeed = volvo.getCurrentSpeed();
@@ -21,6 +24,10 @@ class Volvo240Test {
         assertNotEquals(startingSpeed, volvo.getCurrentSpeed());
     }
 
+    /**
+     * Tests that stopping the engine sets its current speed to 0
+     *  (highly unrealistic but according to spec)
+     */
     @Test
     void stopEngine() {
         for (int i = 0; i < 100; i++) {
@@ -31,6 +38,43 @@ class Volvo240Test {
         assertEquals(0, volvo.getCurrentSpeed());
     }
 
+    /**
+     * Tests that the '.gas()' method with a positive number DOES affect the current speed
+     */
+    @Test
+    void gasWithPositiveNumber() {
+
+        double initialSpeed = volvo.getCurrentSpeed();
+
+        for (int i = 0; i < 100; i++) {
+            volvo.gas(1);
+        }
+
+        assertNotEquals(initialSpeed, volvo.getCurrentSpeed());
+    }
+
+    /**
+     * Tests that '.gas()' using a negative number doesn't affect the current speed
+     */
+    @Test
+    void gasWithNegativeNumber() {
+
+        for (int i = 0; i < 100; i++) {
+            volvo.gas(1);
+        }
+        double previousSpeed = volvo.getCurrentSpeed();
+
+        for (int i = 0; i < 100; i++) {
+            volvo.gas(-1);
+        }
+
+        assertEquals(previousSpeed, volvo.getCurrentSpeed());
+    }
+
+    /**
+     * Tests that trying to accelerate past the
+     *  engines power-limits won't increase its speed
+     */
     @Test
     void gasReachesPowerLimit() {
 
