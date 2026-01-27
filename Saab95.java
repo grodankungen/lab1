@@ -17,12 +17,12 @@ public class Saab95 extends Car {
     }
 
     @Override
-    public void incrementSpeed(double amount) {
+    protected void incrementSpeed(double amount) {
         setCurrentSpeed(getCurrentSpeed() + speedFactor() * amount);
     }
 
     @Override
-    public void decrementSpeed(double amount) {
+    protected void decrementSpeed(double amount) {
         setCurrentSpeed(getCurrentSpeed() - speedFactor() * amount);
     }
 
