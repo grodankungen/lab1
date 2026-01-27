@@ -75,3 +75,6 @@ class Volvo240Test {
         assertEquals(expected, actual);
     }
 }
+
+// Om man skickar in ett negativt värdet till turnLeft -> svänga höger?
+// Om man svänger > 360 grader -> angle += 360 funkar inte
