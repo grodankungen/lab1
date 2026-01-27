@@ -91,7 +91,7 @@ class Volvo240Test {
     }
 
     /**
-     * Test that brake() won't result in negative speed
+     * Tests that brake() won't result in negative speed
      */
     @Test
     void brake() {
@@ -109,6 +109,9 @@ class Volvo240Test {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Tests that the color is set correctly
+     */
     @Test
     void setColor() {
         volvo.setColor(Color.red);
