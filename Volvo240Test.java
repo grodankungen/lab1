@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Volvo240Test {
     Volvo240 volvo;
+
     @BeforeEach
     void setUp() {
         this.volvo = new Volvo240();
@@ -15,12 +16,17 @@ class Volvo240Test {
         double startingSpeed = volvo.getCurrentSpeed();
 
         volvo.startEngine();
-
         assertNotEquals(startingSpeed, volvo.getCurrentSpeed());
     }
 
     @Test
     void stopEngine() {
+        for (int i = 0; i < 100; i++) {
+            volvo.gas(1);
+        }
+
+        volvo.stopEngine();
+        assertEquals(0, volvo.getCurrentSpeed());
     }
 
     @Test
