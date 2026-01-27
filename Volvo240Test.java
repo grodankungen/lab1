@@ -13,6 +13,9 @@ class Volvo240Test {
         this.volvo = new Volvo240();
     }
 
+    /**
+     * Tests that the startEngine method increases speed as expected
+     */
     @Test
     void startEngine() {
         double startingSpeed = volvo.getCurrentSpeed();
@@ -21,6 +24,10 @@ class Volvo240Test {
         assertNotEquals(startingSpeed, volvo.getCurrentSpeed());
     }
 
+    /**
+     * Tests that stopping the engine sets its current speed to 0
+     *  (highly unrealistic but according to spec)
+     */
     @Test
     void stopEngine() {
         for (int i = 0; i < 100; i++) {
@@ -64,6 +71,10 @@ class Volvo240Test {
         assertEquals(previousSpeed, volvo.getCurrentSpeed());
     }
 
+    /**
+     * Tests that trying to accelerate past the
+     *  engines power-limits won't increase its speed
+     */
     @Test
     void gasReachesPowerLimit() {
 
