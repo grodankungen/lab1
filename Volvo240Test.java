@@ -61,8 +61,15 @@ class Volvo240Test {
 
     @Test
     void move() {
+
     }
 
+    /*
+    Tests if the methods handles:
+        - Positive angles
+        - Negative angles
+        - Multiple rotations (> 360), should be normalized to 0-360 after turn
+     */
     @Test
     void turnLeft() {
         double[] expected = {90, 90, 90};
@@ -87,6 +94,7 @@ class Volvo240Test {
         assertArrayEquals(expected, actual);
     }
 
+    // Helper methods for turnLeft / turnRight
     private double turnRightAndGetAngle(double degrees) {
         volvo.turnRight(degrees);
         return volvo.getAngle();
