@@ -40,7 +40,7 @@ class Volvo240Test {
         }
 
         double exp = volvo.getEnginePower();
-        double real =  volvo.getCurrentSpeed();
+        double real = volvo.getCurrentSpeed();
 
         assertEquals(exp, real);
 
@@ -65,27 +65,35 @@ class Volvo240Test {
 
     @Test
     void turnLeft() {
-        double angle = volvo.getAngle();
-        volvo.turnLeft(90);
+        double[] expected = {90, 90, 90};
+        double[] actual = {
+                turnLeftAndGetAngle(90),
+                turnLeftAndGetAngle(-90),
+                turnLeftAndGetAngle(1080)  // 3 cycles
+        };
 
-        double expected = angle + 90;
-        double actual = volvo.getAngle();
-        assertEquals(expected, actual);
+        assertArrayEquals(expected, actual);
     }
 
     @Test
     void turnRight() {
-        double angle = volvo.getAngle();
-        volvo.turnRight(90);
+        double[] expected = {270, 270, 270};
+        double[] actual = {
+                turnRightAndGetAngle(90),
+                turnRightAndGetAngle(-90),
+                turnRightAndGetAngle(1080)  // 3 cycles
+        };
 
-        double expected = angle - 90;
-        if (expected < 0) {
-            expected += 360;
-        }
-        double actual = volvo.getAngle();
-        assertEquals(expected, actual);
+        assertArrayEquals(expected, actual);
+    }
+
+    private double turnRightAndGetAngle(double degrees) {
+        volvo.turnRight(degrees);
+        return volvo.getAngle();
+    }
+
+    private double turnLeftAndGetAngle(double degrees) {
+        volvo.turnLeft(degrees);
+        return volvo.getAngle();
     }
 }
-
-// Om man skickar in ett negativt värdet till turnLeft -> svänga höger?
-// Om man svänger > 360 grader -> angle += 360 funkar inte
