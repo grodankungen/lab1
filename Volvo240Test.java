@@ -31,6 +31,39 @@ class Volvo240Test {
         assertEquals(0, volvo.getCurrentSpeed());
     }
 
+    /**
+     * Tests that the '.gas()' method with a positive number DOES affect the current speed
+     */
+    @Test
+    void gasWithPositiveNumber() {
+
+        double initialSpeed = volvo.getCurrentSpeed();
+
+        for (int i = 0; i < 100; i++) {
+            volvo.gas(1);
+        }
+
+        assertNotEquals(initialSpeed, volvo.getCurrentSpeed());
+    }
+
+    /**
+     * Tests that '.gas()' using a negative number doesn't affect the current speed
+     */
+    @Test
+    void gasWithNegativeNumber() {
+
+        for (int i = 0; i < 100; i++) {
+            volvo.gas(1);
+        }
+        double previousSpeed = volvo.getCurrentSpeed();
+
+        for (int i = 0; i < 100; i++) {
+            volvo.gas(-1);
+        }
+
+        assertEquals(previousSpeed, volvo.getCurrentSpeed());
+    }
+
     @Test
     void gasReachesPowerLimit() {
 
@@ -40,7 +73,7 @@ class Volvo240Test {
         }
 
         double exp = volvo.getEnginePower();
-        double real =  volvo.getCurrentSpeed();
+        double real = volvo.getCurrentSpeed();
 
         assertEquals(exp, real);
 
