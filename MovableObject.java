@@ -18,12 +18,20 @@ abstract class MovableObject implements Movable {
     }
 
     public void turnLeft(double amount) {
-        angle += amount;
+        if (amount < 0) {
+            return;
+        }
+
+        angle = (angle + amount) % 360;
         angle = angle % 360;
     }
 
     public void turnRight(double amount) {
-        angle -= amount;
+        if (amount < 0) {
+            return;
+        }
+
+        angle = (angle - amount) % 360;
         if (angle < 0) {
             angle += 360;
         }
