@@ -29,5 +29,17 @@ abstract class MovableObject implements Movable {
         }
     }
 
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getAngle() {
+        return angle;
+    }
+
     protected abstract double getCurrentSpeed();
 }
