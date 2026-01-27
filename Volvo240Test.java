@@ -26,7 +26,7 @@ class Volvo240Test {
 
     /**
      * Tests that stopping the engine sets its current speed to 0
-     *  (highly unrealistic but according to spec)
+     * (highly unrealistic but according to spec)
      */
     @Test
     void stopEngine() {
@@ -73,13 +73,13 @@ class Volvo240Test {
 
     /**
      * Tests that trying to accelerate past the
-     *  engines power-limits won't increase its speed
+     * engines power-limits won't increase its speed
      */
     @Test
     void gasReachesPowerLimit() {
 
         //gas that shii up
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 100_000; i++) {
             volvo.gas(1);
         }
 
@@ -90,10 +90,28 @@ class Volvo240Test {
 
     }
 
+    /**
+     * Tests that brake() won't result in negative speed
+     */
     @Test
     void brake() {
+        for (int i = 0; i < 1000; i++) {
+            volvo.gas(1);
+        }
+
+        for (int i = 0; i < 10_000; i++) {
+            volvo.brake(1);
+        }
+
+        double expected = 0;
+        double actual = volvo.getCurrentSpeed();
+
+        assertEquals(expected, actual);
     }
 
+    /**
+     * Tests that the color is set correctly
+     */
     @Test
     void setColor() {
         volvo.setColor(Color.red);
@@ -164,11 +182,11 @@ class Volvo240Test {
         assertArrayEquals(expected_ys, actual_ys);
     }
 
-    /*
-    Tests if the methods handles:
-        - Positive angles
-        - Negative angles
-        - Multiple rotations (> 360), should be normalized to 0-360 after turn
+    /**
+     * Tests if the methods handles:
+     * - Positive angles
+     * - Negative angles
+     * - Multiple rotations (> 360), should be normalized to 0-360 after turn
      */
     @Test
     void turnLeft() {
@@ -194,7 +212,9 @@ class Volvo240Test {
         assertArrayEquals(expected, actual);
     }
 
-    // Helper methods for turnLeft / turnRight
+    /**
+     * Helper methods for turnLeft / turnRight
+     */
     private double turnRightAndGetAngle(double degrees) {
         volvo.turnRight(degrees);
         return volvo.getAngle();
