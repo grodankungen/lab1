@@ -39,7 +39,8 @@ class Volvo240Test {
     }
 
     /**
-     * Tests that the '.gas()' method with a positive number DOES affect the current speed
+     * Tests that the '.gas()' method with a positive number DOES affect the current
+     * speed
      */
     @Test
     void gasWithPositiveNumber() {
@@ -78,7 +79,7 @@ class Volvo240Test {
     @Test
     void gasReachesPowerLimit() {
 
-        //gas that shii up
+        // gas that shii up
         for (int i = 0; i < 100_000; i++) {
             volvo.gas(1);
         }
@@ -121,9 +122,62 @@ class Volvo240Test {
         assertEquals(expected, actual);
     }
 
+    double doubleRounderMcPicklePounder(double dub) {
+        return Math.round(dub * 1e10) / 1e10;
+    }
+
+    double[] move_helper(double angle) {
+
+        volvo.turnLeft(angle);
+        volvo.move();
+
+        return new double[]{
+                doubleRounderMcPicklePounder(volvo.getX()),
+                doubleRounderMcPicklePounder(volvo.getY())
+        };
+    }
+
     @Test
     void move() {
 
+        for (int i = 0; i < 100_000; i++) {
+            volvo.gas(1);
+        }
+        double maxSpeed = volvo.getCurrentSpeed();
+
+        double[] expected_xs = {
+                doubleRounderMcPicklePounder(maxSpeed),
+                doubleRounderMcPicklePounder(maxSpeed + maxSpeed * Math.cos(Math.toRadians(45))), // 45 DEG LEFT
+                doubleRounderMcPicklePounder(maxSpeed + 2 * maxSpeed * Math.cos(Math.toRadians(45))), // 90 DEG Right
+
+        };
+
+        double[] expected_ys = {
+                0,
+                doubleRounderMcPicklePounder(maxSpeed * Math.sin(Math.toRadians(45))),
+                0
+        };
+
+        double[] actual_xs = new double[3];
+        double[] actual_ys = new double[3];
+
+        double[] x_and_y = move_helper(0);
+        actual_xs[0] = x_and_y[0];
+        actual_ys[0] = x_and_y[1];
+
+        x_and_y = move_helper(45);
+        actual_xs[1] = x_and_y[0];
+        actual_ys[1] = x_and_y[1];
+
+        x_and_y = move_helper(270);
+        actual_xs[2] = x_and_y[0];
+        actual_ys[2] = x_and_y[1];
+
+        // x-coordinates
+        assertArrayEquals(expected_xs, actual_xs);
+
+        // y-coordinates
+        assertArrayEquals(expected_ys, actual_ys);
     }
 
     /**
@@ -138,7 +192,7 @@ class Volvo240Test {
         double[] actual = {
                 turnLeftAndGetAngle(90),
                 turnLeftAndGetAngle(-90),
-                turnLeftAndGetAngle(1080)  // 3 cycles
+                turnLeftAndGetAngle(1080) // 3 cycles
         };
 
         assertArrayEquals(expected, actual);
@@ -150,7 +204,7 @@ class Volvo240Test {
         double[] actual = {
                 turnRightAndGetAngle(90),
                 turnRightAndGetAngle(-90),
-                turnRightAndGetAngle(1080)  // 3 cycles
+                turnRightAndGetAngle(1080) // 3 cycles
         };
 
         assertArrayEquals(expected, actual);
