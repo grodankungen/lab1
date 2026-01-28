@@ -16,8 +16,6 @@ abstract class GenericCarTest {
         car = createCar();
     }
 
-    ;
-
     /**
      * Tests that the startEngine method increases speed as expected
      */
