@@ -11,20 +11,6 @@ public class Vector2 {
         this.x = 0;
         this.y = 0;
     }
-    public void add(double x, double y) {
-        this.x += x;
-        this.y += y;
-    }
-    public void set(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-    public void set(Double[] vector) {
-        if (vector.length == 3) {
-            this.x = vector[0];
-            this.y = vector[1];
-        }
-    }
     public double x(){
         return this.x;
     }
@@ -32,19 +18,25 @@ public class Vector2 {
         return this.y;
     }
 
-    public void scale(double scalar) {
-        this.x *= scalar;
-        this.y *= scalar;
+    public Vector2 scaled(double scalar) {
+        return new Vector2(this.x * scalar, this.y * scalar);
     }
-    public void normalize(){
-        double length = Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
-        this.x /= length;
-        this.y /= length;
+    public double length(){
+        return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
     }
-    public void turn(double angle){
+    public Vector2 add(Vector2 other) {
+        return new Vector2(this.x + other.x(), this.y + other.y());
+    }
+    public Vector2 normalized(){
+        return new Vector2(this.x/this.length(), this.y/this.length());
+    }
+    public Vector2 turned(double angle){
         angle = angle % 360;
         angle = Math.toRadians(angle);
-        this.x = this.x * Math.cos(angle) - this.y * Math.sin(angle);
-        this.y = this.x * Math.sin(angle) + this.y * Math.cos(angle);
+        double temp_x = this.x * Math.cos(angle) - this.y * Math.sin(angle);
+        double temp_y = this.x * Math.sin(angle) + this.y * Math.cos(angle);
+        if (Math.abs(temp_x) < Math.pow(10, -15)){temp_x = 0;}
+        if (Math.abs(temp_y) < Math.pow(10, -15)){temp_y = 0;}
+        return new Vector2(temp_x, temp_y);
     }
 }

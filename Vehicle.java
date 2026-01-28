@@ -6,29 +6,27 @@ public abstract class Vehicle extends Movable_Object{
     private String modelName; // The car model name
     private Vector2 direction;
 
-    public Vehicle(double currentSpeed, Color color, String modelName, Vector2 direction){
+    public Vehicle(Color color, String modelName, Vector2 direction){
         super();
-        this.currentSpeed = currentSpeed;
+        this.currentSpeed = 0;
         this.color = color;
         this.modelName = modelName;
-        this.direction = direction;
+        this.direction = direction.normalized();
         this.update_speed();
     }
 
     private void update_speed(){
-        direction.normalize();
-        this.set_velocity(direction.x(), direction.y());
-        this.velocity().scale(currentSpeed);
-    }
-
-    @Override
-    public void tick() {
-        this.update_speed();
-        super.tick();
+        Vector2 new_velocity = this.direction.scaled(currentSpeed);
+        this.set_velocity(new_velocity.x(), new_velocity.y());
     }
 
     private void set_direction(Vector2 direction){
         this.direction = direction;
+        this.update_speed();
+    }
+
+    protected Vector2 get_direction(){
+        return this.direction;
     }
 
     protected void incrementSpeed(double amount, double max_speed){
@@ -39,7 +37,7 @@ public abstract class Vehicle extends Movable_Object{
         set_speed(Math.max(this.currentSpeed - amount, 0));
     }
 
-    private void set_speed(double speed) {
+    protected void set_speed(double speed) {
         currentSpeed = speed;
         update_speed();
     }
@@ -58,13 +56,13 @@ public abstract class Vehicle extends Movable_Object{
 
     public void turnLeft(double angle){
         if (angle > 0){
-            this.direction.turn(angle);
+            this.direction = this.direction.turned(angle).normalized();
             this.update_speed();
         }
     }
     public void turnRight(double angle){
         if (angle > 0){
-            this.direction.turn(-angle);
+            this.direction = this.direction.turned(-angle).normalized();
             this.update_speed();
         }
     }

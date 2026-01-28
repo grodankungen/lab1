@@ -10,21 +10,16 @@ public abstract class Movable_Object{
         this.position = new Vector2(0, 0);
         this.velocity = new Vector2(0, 0);
     }
-    public void set_velocity(double x, double y) {
-        this.velocity.set(x, y);
-    }
 
-    public void accelerate(double x, double y) {
-        this.velocity.add(x, y);
+    public void set_velocity(double x, double y) {
+        this.velocity = new Vector2(x, y);
     }
-    public void move(double x, double y){
-        this.position.add(x, y);
-    }
-    public void set_position(double x, double y){
-        this.position.set(x, y);
+    private void move(double x, double y){
+        Vector2 delta = new Vector2(x, y);
+        this.position = this.position.add(delta);
     }
     public void tick() {
-        this.position.add(this.velocity.x(), this.velocity.y());
+        this.move(this.velocity.x(), this.velocity.y());
     }
     public Vector2 velocity(){
         return this.velocity;
