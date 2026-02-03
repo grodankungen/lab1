@@ -1,6 +1,8 @@
+package src;
+
 import java.awt.*;
 
-abstract class Car extends Vehicle {
+public abstract class Car extends Vehicle {
     private final int nrDoors;
     private final double enginePower;
 
@@ -23,7 +25,6 @@ abstract class Car extends Vehicle {
         if (amount >= 0 && amount <= 1) {
             incrementSpeed(amount);
         }
-
     }
 
     public void brake(double amount) {

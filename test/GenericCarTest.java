@@ -1,3 +1,6 @@
+package test;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -5,6 +8,8 @@ import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import src.Car;
+import src.Saab95;
 
 abstract class GenericCarTest {
     protected Car car;
@@ -24,7 +29,7 @@ abstract class GenericCarTest {
         double startingSpeed = car.getCurrentSpeed();
 
         car.startEngine();
-        assertNotEquals(startingSpeed, car.getCurrentSpeed());
+        Assertions.assertNotEquals(startingSpeed, car.getCurrentSpeed());
     }
 
     /**
@@ -38,7 +43,7 @@ abstract class GenericCarTest {
         }
 
         car.stopEngine();
-        assertEquals(0, car.getCurrentSpeed());
+        Assertions.assertEquals(0, car.getCurrentSpeed());
     }
 
     /**
@@ -54,7 +59,7 @@ abstract class GenericCarTest {
             car.gas(1);
         }
 
-        assertNotEquals(initialSpeed, car.getCurrentSpeed());
+        Assertions.assertNotEquals(initialSpeed, car.getCurrentSpeed());
     }
 
     /**
@@ -72,7 +77,7 @@ abstract class GenericCarTest {
             car.gas(-1);
         }
 
-        assertEquals(previousSpeed, car.getCurrentSpeed());
+        Assertions.assertEquals(previousSpeed, car.getCurrentSpeed());
     }
 
     /**
