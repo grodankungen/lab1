@@ -1,6 +1,6 @@
 package src;
 
 public interface Cargo {
-    void raise();
-    void lower();
+    void raise(double amount);
+    void lower(double amount);
 }
