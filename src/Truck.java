@@ -14,11 +14,36 @@ abstract class Truck extends Car implements Cargo {
 
     @Override
     public void raise(double amount) {
-
+        if (getCurrentSpeed() == 0) {
+            this.angle += amount;
+            if (this.angle > 70) {
+                this.angle = 70;
+            }
+        }
     }
 
     @Override
     public void lower(double amount) {
+        if (getCurrentSpeed() == 0) {
+            this.angle -= amount;
+            if (this.angle < 0) {
+                this.angle = 0;
+            }
+        }
+    }
 
+    @Override
+    public void gas(double amount) {
+        if (this.angle == 0) {
+            super.gas(amount);
+        }
+    }
+
+    @Override
+    public void brake(double amount) {
+        if (this.angle == 0) {
+            super.brake(amount);
+        }
     }
 }
+
