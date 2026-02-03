@@ -3,50 +3,47 @@ package src;
 import java.awt.*;
 
 abstract class Truck extends Car implements Cargo {
-    private double cargoAngle;
+    private final Cargo cargo;  // Can be either tip or ramp
 
-    public Truck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
+    public Truck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, Cargo cargo) {
         super(nrDoors, enginePower, currentSpeed, color, modelName);
-    }
-
-    @Override
-    abstract protected double speedFactor();
-
-    @Override
-    public double getCargoAngle() {
-        return this.cargoAngle;
+        this.cargo = cargo;
     }
 
     @Override
     public void raise(double amount) {
         if (getCurrentSpeed() == 0) {
-            this.cargoAngle += amount;
-            if (this.cargoAngle > 70) {
-                this.cargoAngle = 70;
-            }
+            cargo.raise(amount);
         }
     }
 
     @Override
     public void lower(double amount) {
         if (getCurrentSpeed() == 0) {
-            this.cargoAngle -= amount;
-            if (this.cargoAngle < 0) {
-                this.cargoAngle = 0;
-            }
+            cargo.lower(amount);
         }
     }
 
     @Override
+    public double getCargoAngle() {
+        return cargo.getCargoAngle();
+    }
+
+    @Override
+    public boolean isCargoInResetPosition() {
+        return cargo.isCargoInResetPosition();
+    }
+
+    @Override
     public void gas(double amount) {
-        if (this.cargoAngle == 0) {
+        if (cargo.isCargoInResetPosition()) {
             super.gas(amount);
         }
     }
 
     @Override
     public void brake(double amount) {
-        if (this.cargoAngle == 0) {
+        if (cargo.isCargoInResetPosition()) {
             super.brake(amount);
         }
     }

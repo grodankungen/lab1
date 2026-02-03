@@ -13,8 +13,6 @@ abstract class Vehicle extends MovableObject {
     }
 
 
-
-
     public Color getColor() {
         return color;
     }

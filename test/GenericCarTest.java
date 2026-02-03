@@ -9,7 +9,6 @@ import java.awt.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import src.Car;
-import src.Saab95;
 
 abstract class GenericCarTest {
     protected Car car;

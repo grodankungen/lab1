@@ -6,4 +6,6 @@ public interface Cargo {
     void lower(double amount);
 
     double getCargoAngle();
+
+    boolean isCargoInResetPosition();
 }

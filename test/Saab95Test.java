@@ -1,4 +1,8 @@
+package test;
+
 import org.junit.jupiter.api.Test;
+import src.Car;
+import src.Saab95;
 
 import static org.junit.jupiter.api.Assertions.*;
 

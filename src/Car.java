@@ -54,5 +54,7 @@ public abstract class Car extends Vehicle {
         setCurrentSpeed(Math.max(getCurrentSpeed() - speedFactor() * amount, 0));
     }
 
-    protected abstract double speedFactor();
+    protected double speedFactor() {
+        return getEnginePower();
+    }
 }
