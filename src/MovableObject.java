@@ -4,11 +4,14 @@ abstract class MovableObject implements Movable {
     private double x;
     private double y;
     private double angle;
+    private double currentSpeed;
 
-    public MovableObject(double x, double y, double angle) {
+
+    public MovableObject(double x, double y, double angle, double speed) {
         this.x = x;
         this.y = y;
         this.angle = angle;
+        this.currentSpeed = speed;
     }
 
     public void move() {
@@ -17,6 +20,15 @@ abstract class MovableObject implements Movable {
 
         x += speed * Math.cos(rad);
         y += speed * Math.sin(rad);
+    }
+
+    @Override
+    public double getCurrentSpeed() {
+        return currentSpeed;
+    }
+
+    protected void setCurrentSpeed(double speed) {
+        this.currentSpeed = Math.max(speed, 0);
     }
 
     public void turnLeft(double amount) {
@@ -50,6 +62,4 @@ abstract class MovableObject implements Movable {
     public double getAngle() {
         return angle;
     }
-
-    protected abstract double getCurrentSpeed();
 }

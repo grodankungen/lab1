@@ -10,9 +10,7 @@ abstract class Truck extends Car implements Cargo {
     }
 
     @Override
-    protected double speedFactor() {
-        return getEnginePower();
-    }
+    abstract protected double speedFactor();
 
     @Override
     public void raise(double amount) {
