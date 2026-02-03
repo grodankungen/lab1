@@ -1,6 +1,8 @@
+package src;
+
 import java.awt.*;
 
-abstract class Car extends Vehicle {
+public abstract class Car extends Vehicle {
     private final int nrDoors;
     private final double enginePower;
 

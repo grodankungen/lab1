@@ -1,3 +1,5 @@
+package src;
+
 import java.awt.*;
 
 abstract class Vehicle extends MovableObject {

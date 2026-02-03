@@ -1,10 +1,12 @@
+package src;
+
 import java.awt.*;
 
-public class Scania extends Car {
+public class Scania extends Car{
 
 
     public Scania() {
-        super(2, 80, 0, Color.black, "Scania");
+        super(2, 80, 0, Color.black, "src.Scania");
     }
 
     @Override
