@@ -7,5 +7,5 @@ public interface Cargo {
 
     double getCargoAngle();
 
-    boolean isCargoInResetPosition();
+    boolean isInResetPosition();
 }

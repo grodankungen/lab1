@@ -28,14 +28,14 @@ abstract class Truck extends Car {
 
     @Override
     public void gas(double amount) {
-        if (cargo.isCargoInResetPosition()) {
+        if (cargo.isInResetPosition()) {
             super.gas(amount);
         }
     }
 
     @Override
     public void brake(double amount) {
-        if (cargo.isCargoInResetPosition()) {
+        if (cargo.isInResetPosition()) {
             super.brake(amount);
         }
     }

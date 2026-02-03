@@ -23,7 +23,7 @@ public class RampCargo implements Cargo {
     }
 
     @Override
-    public boolean isCargoInResetPosition() {
+    public boolean isInResetPosition() {
         return !isLowered;
     }
 }

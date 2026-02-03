@@ -24,7 +24,7 @@ public class TipCargo implements Cargo {
     }
 
     @Override
-    public boolean isCargoInResetPosition() {
+    public boolean isInResetPosition() {
         return this.cargoAngle == 0;
     }
 }
