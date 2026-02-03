@@ -4,27 +4,23 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class CarTransport extends Truck {
-    private int capacity;
-    private RampCargo rampCargo;
-    private ArrayList<Car> loadedCars;
+    private CarStorage carStorage;
 
-    public CarTransport(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, RampCargo rampCargo, int capacity, ArrayList<Car> loadedCars) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName, rampCargo);
-        this.capacity = capacity;
+    public CarTransport(int capacity) {
+        super(2, 50, 0, Color.white, "The MEGA Car Transport", new RampCargo());
+        carStorage = new CarStorage(capacity);
     }
 
     public void loadCar(Car car) {
-        if (car instanceof PersonalCar && rampCargo.getCargoAngle() == 45 && loadedCars.size() < capacity) {
-            loadedCars.add(car);
-            capacity++;
+        if (car instanceof PersonalCar && getCargoAngle() == 45) {
+            carStorage.loadCar(car);
         }
     }
 
     public void offloadCar() {
-        if (rampCargo.getCargoAngle() != 45) {  // can't offload car if ramp is not lowered
+        if (getCargoAngle() != 45) {  // can't offload car if ramp is not lowered
             return;
         }
-        int index = loadedCars.size() - 1;
-        loadedCars.remove(index);
+        carStorage.offloadCar();
     }
 }
