@@ -1,7 +1,6 @@
 package src;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class CarTransport extends Truck {
     private CarStorage carStorage;
@@ -12,7 +11,7 @@ public class CarTransport extends Truck {
     }
 
     public void loadCar(Car car) {
-        if (car instanceof PersonalCar && getCargoAngle() == 45) {
+        if (car instanceof Loadable && getCargoAngle() == 45) {
             carStorage.loadCar(car);
         }
     }
