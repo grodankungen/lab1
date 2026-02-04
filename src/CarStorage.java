@@ -2,18 +2,19 @@ package src;
 
 import java.util.ArrayList;
 
-public class CarStorage {
+public class CarStorage<T extends Car> {
     private final int capacity;
-    private final ArrayList<Car> loadedCars;
+    private final ArrayList<T> loadedCars;
 
     public CarStorage(int capacity) {
         this.capacity = capacity;
         this.loadedCars = new ArrayList<>();
     }
 
-    public void loadCar(Car car) {
+    public void loadCar(T car) {
         if (loadedCars.size() < capacity) {
             loadedCars.add(car);
+            car.carIsLoaded();
         }
     }
 
@@ -22,10 +23,16 @@ public class CarStorage {
             return;
         }
         int index = loadedCars.size() - 1;
-        loadedCars.remove(index);
+        T t = loadedCars.remove(index);
+        t.carIsOffloaded();
     }
 
-    public void offloadCar(Car car) {
+    public void offloadCar(T car) {
         loadedCars.remove(car);
+        car.carIsOffloaded();
+    }
+
+    public ArrayList<T> getLoadedCars() {
+        return loadedCars;
     }
 }

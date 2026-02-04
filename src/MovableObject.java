@@ -62,4 +62,9 @@ abstract class MovableObject implements Movable {
     public double getAngle() {
         return angle;
     }
+
+    protected void setPosition(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
 }
