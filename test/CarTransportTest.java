@@ -10,6 +10,7 @@ import src.Car;
 import src.Volvo240;
 import src.Saab95;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -34,13 +35,19 @@ class CarTransportTest extends GenericCarTest {
 
     @Test
     void loadCar() {
+        Volvo240 volvo = new Volvo240();
+        for (int i = 0; i < 100_00; i++) {
+            volvo.gas(1);
+        }
 
         //load while raising ramp
-        helper_load_some_cars(List.of(new Volvo240(), new Saab95()));
+        helper_load_some_cars(List.of(volvo, new Saab95()));
         int currSize = ((CarTransport) car).getLoadedCars().size();
         int exp1 = 2;
         assertEquals(exp1, currSize);
 
+        // test if loadd Volvo speed is 0
+        assertEquals(0, volvo.getCurrentSpeed());
 
         //attempt loading without lowering ramp
         int prevSize = ((CarTransport) car).getLoadedCars().size();
@@ -71,7 +78,25 @@ class CarTransportTest extends GenericCarTest {
         currSize = ((CarTransport) car).getLoadedCars().size();
         int exp2 = 1;
         assertEquals(exp2, currSize);
+    }
 
+    @Test
+    public void testOffloadingInRightOrder() {
+        Volvo240 volvo = new Volvo240();
+        Saab95 saab95 = new Saab95();
+        helper_load_some_cars(List.of(volvo, saab95));
+
+
+        ArrayList<Car> offLoadedCars = new ArrayList<>();
+
+        ((CarTransport) car).offloadCar();
+
+        // TODO fixa detta
+
+//        for (int i = 0; i < ((CarTransport) car).getLoadedCars().size(); i++) {
+//            ((CarTransport) car).offloadCar();
+//            offLoadedCars.add();
+//        }
     }
 
     @Test
