@@ -1,0 +1,8 @@
+package src;
+
+import java.util.ArrayList;
+
+public interface Unloadable<T extends Car> {
+
+    public ArrayList<T> getLoadedCars();
+}

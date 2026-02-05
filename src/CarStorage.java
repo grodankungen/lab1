@@ -2,7 +2,7 @@ package src;
 
 import java.util.ArrayList;
 
-public class CarStorage<T extends Car> {
+public class CarStorage<T extends Car> implements Unloadable {
     private final int capacity;
     private final ArrayList<T> loadedCars;
 

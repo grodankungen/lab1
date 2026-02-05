@@ -3,7 +3,7 @@ package src;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class CarTransport extends Truck {
+public class CarTransport extends Truck implements Unloadable {
     private CarStorage<Car> carStorage;
 
     public CarTransport(int capacity) {
@@ -21,7 +21,7 @@ public class CarTransport extends Truck {
 
         if (!isCargoInResetPosition() && distance <= 5) {
             carStorage.loadCar(car);
-        }  else {
+        } else {
             System.out.println(car + " is not close enough to the ramp.");
         }
     }
