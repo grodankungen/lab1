@@ -22,7 +22,11 @@ class CarTransportTest extends GenericCarTest {
         return new CarTransport(5);
     }
 
+    /**
+     * Helper: lowers the ramp, loads provided cars, then raises the ramp again
+     */
     void helper_load_some_cars(Collection<Car> theCars) {
+
         ((CarTransport) car).lower(45);
         for (Car c : theCars) {
             ((CarTransport) car).loadCar(c);
@@ -33,28 +37,42 @@ class CarTransportTest extends GenericCarTest {
     @Test
     void loadCar() {
 
-        int prevSize = ((CarTransport) car).getLoadedCars().size();
+        //load while raising ramp
         helper_load_some_cars(List.of(new Volvo240(), new Saab95()));
         int currSize = ((CarTransport) car).getLoadedCars().size();
+        int exp1 = 2;
+        assertEquals(exp1, currSize);
 
-        assertNotEquals(prevSize, currSize);
+
+        //attempt loading without lowering ramp
+        int prevSize = ((CarTransport) car).getLoadedCars().size();
+
+        //DONT --->((CarTransport) car).lower(45);
+        ((CarTransport) car).loadCar(new Volvo240());
+        currSize = ((CarTransport) car).getLoadedCars().size();
+
+        assertEquals(prevSize, currSize);
+
 
     }
 
     @Test
     void offloadCar() {
         helper_load_some_cars(List.of(new Volvo240(), new Saab95()));
+
+        //Tests offloading before lowering ramp
+        //DONT ---> ((CarTransport) car).lower(45);
         ((CarTransport) car).offloadCar();
         int currSize = ((CarTransport) car).getLoadedCars().size();
-        int exp1 = 1;
-
+        int exp1 = 2;
         assertEquals(exp1, currSize);
 
+        //Test offloading after lowering
+        ((CarTransport) car).lower(45);
         ((CarTransport) car).offloadCar();
         currSize = ((CarTransport) car).getLoadedCars().size();
         int exp2 = 1;
-
-        assertNotEquals(exp2, currSize);
+        assertEquals(exp2, currSize);
 
     }
 
