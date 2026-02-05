@@ -28,9 +28,12 @@ public class CarTransport extends Truck {
 
     public void offloadCar() {
         if (!isCargoInResetPosition()) {  // can't offload car if ramp is not lowered
-            return;
+            carStorage.offloadCar();
         }
-        carStorage.offloadCar();
+    }
+
+    public ArrayList<Car> getLoadedCars() {
+        return carStorage.getLoadedCars();
     }
 
     @Override
@@ -38,7 +41,7 @@ public class CarTransport extends Truck {
         super.move();
 
         /* The loaded Cars move with a different speed than CarTransport,
-        so they must use setPosition() instead of move() */ 
+        so they must use setPosition() instead of move() */
         for (Car car : carStorage.getLoadedCars()) {
             car.setPosition(this.getX(), this.getY());
         }
