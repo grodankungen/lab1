@@ -15,6 +15,7 @@ public class CarStorage<T extends Car> {
         if (loadedCars.size() < capacity) {
             loadedCars.add(car);
             car.carIsLoaded();
+            car.stopEngine();
         }
     }
 

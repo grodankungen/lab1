@@ -12,8 +12,17 @@ public class CarTransport extends Truck {
     }
 
     public void loadCar(Car car) {
-        if (!isCargoInResetPosition()) {
+        double truckX = this.getX();
+        double truckY = this.getY();
+        double carX = car.getX();
+        double carY = car.getY();
+
+        double distance = Math.sqrt(Math.pow(carX - truckX, 2) + Math.pow(carY - truckY, 2));
+
+        if (!isCargoInResetPosition() && distance <= 5) {
             carStorage.loadCar(car);
+        }  else {
+            System.out.println(car + " is not close enough to the ramp.");
         }
     }
 
@@ -34,6 +43,4 @@ public class CarTransport extends Truck {
             car.setPosition(this.getX(), this.getY());
         }
     }
-
-    // Måste lägga till avståndskontroll - är bilen tillräckligt nära för att kunna lastas?
 }
