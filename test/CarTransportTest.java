@@ -23,16 +23,17 @@ class CarTransportTest extends GenericCarTest {
     }
 
     void helper_load_some_cars(Collection<Car> theCars) {
+        ((CarTransport) car).lower(45);
         for (Car c : theCars) {
             ((CarTransport) car).loadCar(c);
         }
+        ((CarTransport) car).raise(45);
     }
 
     @Test
     void loadCar() {
 
         int prevSize = ((CarTransport) car).getLoadedCars().size();
-        ((CarTransport) car).lower(90);
         helper_load_some_cars(List.of(new Volvo240(), new Saab95()));
         int currSize = ((CarTransport) car).getLoadedCars().size();
 
@@ -42,7 +43,19 @@ class CarTransportTest extends GenericCarTest {
 
     @Test
     void offloadCar() {
-        //TODO: load some cars and try to offload them
+        helper_load_some_cars(List.of(new Volvo240(), new Saab95()));
+        ((CarTransport) car).offloadCar();
+        int currSize = ((CarTransport) car).getLoadedCars().size();
+        int exp1 = 1;
+
+        assertEquals(exp1, currSize);
+
+        ((CarTransport) car).offloadCar();
+        currSize = ((CarTransport) car).getLoadedCars().size();
+        int exp2 = 1;
+
+        assertNotEquals(exp2, currSize);
+
     }
 
     @Test
