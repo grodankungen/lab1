@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import src.CarTransport;
 
 import src.Car;
@@ -79,5 +77,6 @@ class CarTransportTest extends GenericCarTest {
     @Test
     void testMove() {
         //TODO: move the truck and make sure that car-positions are updated. somnehow...
+
     }
 }
