@@ -34,5 +34,5 @@ public class CarStorage<T extends Car> {
 
     public ArrayList<T> getLoadedCars() {
         return loadedCars;
-    }
+    }   // TODO måste vi returnera en kopia av listan?
 }

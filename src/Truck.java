@@ -26,6 +26,10 @@ abstract class Truck extends Car {
         return cargo.getCargoAngle();
     }
 
+    public boolean isCargoInResetPosition() {
+        return cargo.isInResetPosition();
+    }
+
     @Override
     public void gas(double amount) {
         if (cargo.isInResetPosition()) {

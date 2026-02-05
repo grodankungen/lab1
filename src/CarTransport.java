@@ -12,13 +12,13 @@ public class CarTransport extends Truck {
     }
 
     public void loadCar(Car car) {
-        if (getCargoAngle() == 45) {
+        if (!isCargoInResetPosition()) {
             carStorage.loadCar(car);
         }
     }
 
     public void offloadCar() {
-        if (getCargoAngle() != 45) {  // can't offload car if ramp is not lowered
+        if (!isCargoInResetPosition()) {  // can't offload car if ramp is not lowered
             return;
         }
         carStorage.offloadCar();
@@ -35,5 +35,5 @@ public class CarTransport extends Truck {
         }
     }
 
-
+    // Måste lägga till avståndskontroll - är bilen tillräckligt nära för att kunna lastas?
 }

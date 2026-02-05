@@ -5,13 +5,13 @@ import java.awt.*;
 public abstract class Car extends Vehicle {
     private final int nrDoors;
     private final double enginePower;
-    private boolean isLoaded;
+    private boolean isOnTransport;
 
     public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
         super(currentSpeed, color, modelName);
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
-        this.isLoaded = false;
+        this.isOnTransport = false;
         stopEngine();
     }
 
@@ -62,16 +62,23 @@ public abstract class Car extends Vehicle {
 
     @Override
     protected void setPosition(double x, double y) {
-        if (isLoaded) {
+        if (isOnTransport) {
             super.setPosition(x, y);
         }
     }
 
+    @Override
+    public void move() {
+        if (!isOnTransport) {
+            super.move();
+        }
+    }
+
     public void carIsLoaded() {
-        isLoaded = true;
+        isOnTransport = true;
     }
 
     public void carIsOffloaded() {
-        isLoaded = false;
+        isOnTransport = false;
     }
 }
