@@ -101,7 +101,51 @@ class CarTransportTest extends GenericCarTest {
 
     @Test
     void testMove() {
-        //TODO: move the truck and make sure that car-positions are updated. somnehow...
+        Volvo240 volvo = new Volvo240();
+
+        volvo.startEngine();
+        volvo.move();
+
+        double prevVolvoX = volvo.getX();
+        double prevVolvoY = volvo.getY();
+
+        helper_load_some_cars(List.of(volvo));
+
+
+        for (int i = 0; i < 100_000; i++) {
+            car.gas(1);
+        }
+
+        car.move();
+        car.turnRight(10);
+
+        car.move();
+        car.turnRight(10);
+
+        car.move();
+        car.turnRight(10);
+
+        double currX = volvo.getX();
+        double currYMcFlurry = volvo.getY();
+
+        // TEST 1(A): assert that volvo has "left" its initial position
+        assertNotEquals(prevVolvoX, currX);
+        assertNotEquals(prevVolvoY, currYMcFlurry);
+        //TEST 1(B): assert that volvo has followed the truck
+        assertEquals(car.getX(), currX);
+        assertEquals(car.getY(), currYMcFlurry);
+
+
+        //TEST 2: Tests that the volvo stops "following" once unloaded
+        car.stopEngine();
+        ((CarTransport) car).lower(45);
+        ((CarTransport) car).offloadCar();
+        ((CarTransport) car).raise(45);
+        car.move();
+
+        assertEquals(currX, volvo.getX());
+        assertEquals(currYMcFlurry, volvo.getY());
+
 
     }
 }
