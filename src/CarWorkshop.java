@@ -15,6 +15,10 @@ public class CarWorkshop<T extends Car> implements Unloadable {
     }
 
     public void offloadCar(T car) {
+        if(carStorage.getLoadedCars().isEmpty()) {
+            System.out.println("The workshop is empty.");
+            return;
+        }
         carStorage.offloadCar(car);
     }
 
