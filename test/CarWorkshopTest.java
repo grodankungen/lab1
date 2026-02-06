@@ -31,15 +31,15 @@ public class CarWorkshopTest {
         for (int i = 0; i < 10; i++) {
             carWorkshop.loadCar(new Volvo240());
         }
-        ArrayList<Car> workshopSize = carWorkshop.getLoadedCars();
-        assertEquals(5, workshopSize.size());
+
+        assertEquals(5, carWorkshop.getAmountOfLoadedCars());
     }
 
     @Test
     public void testOffloadingEmptyWorkshop() {
         CarWorkshop<Car> carWorkshop = new CarWorkshop<>(5);
         carWorkshop.offloadCar(new Volvo240());
-        assertEquals(0, carWorkshop.getLoadedCars().size());
+        assertEquals(0, carWorkshop.getAmountOfLoadedCars());
     }
 
     @Test
