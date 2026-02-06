@@ -4,11 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import src.CarTransport;
-
-import src.Car;
-import src.Volvo240;
-import src.Saab95;
+import src.*;
 
 import java.util.List;
 
@@ -29,10 +25,10 @@ class CarTransportTest extends GenericCarTest {
     /**
      * Helper: lowers the ramp, loads provided cars, then raises the ramp again
      */
-    void helper_load_some_cars(List<Car> theCars) {
+    <T extends Car & Transportable> void helper_load_some_cars(List<T> theCars) {
 
         car.lower(45);
-        for (Car theCar : theCars) {
+        for (T theCar : theCars) {
             car.loadCar(theCar);
         }
         car.raise(45);
@@ -66,12 +62,13 @@ class CarTransportTest extends GenericCarTest {
 
     /**
      * Tests that it isn't possible to load a car-transport on another car-transport
-     * (we don't support dangerous transport-stacking)
+     * NOTE: compiler produces this error - which we really cant test
      */
     @Test
     void attemptLoadingUnsupportedCar() {
-        helper_load_some_cars(List.of(new CarTransport(10)));
-
+        car.lower(45);
+        //car.loadCar(new CarTransport(3)); //<-- compile time warning
+        car.raise(45);
         int exp = 0;
         assertEquals(exp, car.getAmountOfLoadedCars());
     }

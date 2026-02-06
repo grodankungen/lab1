@@ -11,7 +11,13 @@ public class CarTransport extends Truck implements HasCarStorage<Car> {
         carStorage = new CarStorage<>(capacity);
     }
 
-    public void loadCar(Car car) {
+    /**
+     * Loads given car if it's close enough to the transport and the cargo is lowered.
+     * Gives a compile-time warning if a given car doesn't extend the interface Transportable,
+     *
+     * @param car The car to load
+     */
+    public <T extends Car & Transportable> void loadCar(T car) {
         double truckX = this.getX();
         double truckY = this.getY();
         double carX = car.getX();

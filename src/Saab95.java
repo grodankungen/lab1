@@ -2,7 +2,7 @@ package src;
 
 import java.awt.*;
 
-public class Saab95 extends Car {
+public class Saab95 extends Car implements Transportable {
     private boolean turboOn;
 
     public Saab95() {
