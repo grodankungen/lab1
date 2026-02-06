@@ -1,5 +1,6 @@
 package test;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,9 +15,16 @@ import java.util.List;
 
 class CarTransportTest extends GenericCarTest {
 
+    CarTransport car;
+
+    /**
+     * Somewhat edited function with unintended sideEffects,
+     * however it removes 20+ ((CarTransport) car) casts.
+     */
     @Override
     protected CarTransport createCar() {
-        return new CarTransport(5);
+        car = new CarTransport(5);
+        return car;
     }
 
     /**
@@ -24,11 +32,11 @@ class CarTransportTest extends GenericCarTest {
      */
     void helper_load_some_cars(List<Car> theCars) {
 
-        ((CarTransport) car).lower(45);
+        car.lower(45);
         for (Car theCar : theCars) {
-            ((CarTransport) car).loadCar(theCar);
+            car.loadCar(theCar);
         }
-        ((CarTransport) car).raise(45);
+        car.raise(45);
     }
 
     @Test
@@ -40,7 +48,7 @@ class CarTransportTest extends GenericCarTest {
 
         //load while raising ramp
         helper_load_some_cars(List.of(volvo, new Saab95()));
-        int currSize = ((CarTransport) car).getLoadedCars().size();
+        int currSize = car.getLoadedCars().size();
         int exp1 = 2;
         assertEquals(exp1, currSize);
 
@@ -48,11 +56,11 @@ class CarTransportTest extends GenericCarTest {
         assertEquals(0, volvo.getCurrentSpeed());
 
         //attempt loading without lowering ramp
-        int prevSize = ((CarTransport) car).getLoadedCars().size();
+        int prevSize = car.getLoadedCars().size();
 
-        //DONT --->((CarTransport) car).lower(45);
-        ((CarTransport) car).loadCar(new Volvo240());
-        currSize = ((CarTransport) car).getLoadedCars().size();
+        //DONT car.lower(45);
+        car.loadCar(new Volvo240());
+        currSize = car.getLoadedCars().size();
 
         assertEquals(prevSize, currSize);
 
@@ -64,16 +72,16 @@ class CarTransportTest extends GenericCarTest {
         helper_load_some_cars(List.of(new Volvo240(), new Saab95()));
 
         //Tests offloading before lowering ramp
-        //DONT ---> ((CarTransport) car).lower(45);
-        ((CarTransport) car).offloadCar();
-        int currSize = ((CarTransport) car).getLoadedCars().size();
+        //DONT ---> car.lower(45);
+        car.offloadCar();
+        int currSize = car.getLoadedCars().size();
         int exp1 = 2;
         assertEquals(exp1, currSize);
 
         //Test offloading after lowering
-        ((CarTransport) car).lower(45);
-        ((CarTransport) car).offloadCar();
-        currSize = ((CarTransport) car).getLoadedCars().size();
+        car.lower(45);
+        car.offloadCar();
+        currSize = car.getLoadedCars().size();
         int exp2 = 1;
         assertEquals(exp2, currSize);
     }
@@ -86,10 +94,10 @@ class CarTransportTest extends GenericCarTest {
         //Volvo is loaded first, then saab95.
         helper_load_some_cars(List.of(volvo, saab95));
 
-        ((CarTransport) car).offloadCar();
+        car.offloadCar();
 
         // Check the type of the remaining car is the volvo
-        Car c = ((CarTransport) car).getLoadedCars().getFirst();
+        Car c = car.getLoadedCars().getFirst();
 
         assertInstanceOf(Volvo240.class, c);
 
@@ -134,9 +142,9 @@ class CarTransportTest extends GenericCarTest {
 
         //TEST 2: Tests that the volvo stops "following" once unloaded
         car.stopEngine();
-        ((CarTransport) car).lower(45);
-        ((CarTransport) car).offloadCar();
-        ((CarTransport) car).raise(45);
+        car.lower(45);
+        car.offloadCar();
+        car.raise(45);
         car.move();
 
         assertEquals(currX, volvo.getX());
