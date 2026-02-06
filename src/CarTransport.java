@@ -3,7 +3,7 @@ package src;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class CarTransport extends Truck implements Unloadable {
+public class CarTransport extends Truck implements Unloadable<Car> {
     private CarStorage<Car> carStorage;
 
     public CarTransport(int capacity) {

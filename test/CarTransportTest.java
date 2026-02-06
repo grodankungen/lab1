@@ -10,8 +10,6 @@ import src.Car;
 import src.Volvo240;
 import src.Saab95;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 class CarTransportTest extends GenericCarTest {
@@ -24,11 +22,11 @@ class CarTransportTest extends GenericCarTest {
     /**
      * Helper: lowers the ramp, loads provided cars, then raises the ramp again
      */
-    void helper_load_some_cars(Collection<Car> theCars) {
+    void helper_load_some_cars(List<Car> theCars) {
 
         ((CarTransport) car).lower(45);
-        for (Car c : theCars) {
-            ((CarTransport) car).loadCar(c);
+        for (Car theCar : theCars) {
+            ((CarTransport) car).loadCar(theCar);
         }
         ((CarTransport) car).raise(45);
     }
@@ -84,19 +82,17 @@ class CarTransportTest extends GenericCarTest {
     public void testOffloadingInRightOrder() {
         Volvo240 volvo = new Volvo240();
         Saab95 saab95 = new Saab95();
+
+        //Volvo is loaded first, then saab95.
         helper_load_some_cars(List.of(volvo, saab95));
-
-
-        ArrayList<Car> offLoadedCars = new ArrayList<>();
 
         ((CarTransport) car).offloadCar();
 
-        // TODO fixa detta
+        // Check the type of the remaining car is the volvo
+        Car c = ((CarTransport) car).getLoadedCars().getFirst();
 
-//        for (int i = 0; i < ((CarTransport) car).getLoadedCars().size(); i++) {
-//            ((CarTransport) car).offloadCar();
-//            offLoadedCars.add();
-//        }
+        assertInstanceOf(Volvo240.class, c);
+
     }
 
     @Test

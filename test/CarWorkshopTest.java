@@ -11,12 +11,17 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CarWorkshopTest {
 
     @Test
-    public void testLoadingWrongVeicle() {
+    public void testLoadingWrongVehicle() {
         CarWorkshop<Scania> scaniaWorkshop = new CarWorkshop<>(3);
 
+        //We expect this lambda func to crash, indicating we couldn't load
+        //  an incompatible vehicle.
+        //NOTE: doesn't test the actual code, but makes sure that
+        //  this behavior exists.
         assertThrows(ClassCastException.class, () -> {
             Car fakeCar = new Volvo240();
-            scaniaWorkshop.loadCar((Scania) fakeCar);
+            // scaniaWorkshop.loadCar(fakeCar); //<-- this wont compile
+            scaniaWorkshop.loadCar((Scania) fakeCar); //<-- this will crash
         });
     }
 
@@ -38,13 +43,17 @@ public class CarWorkshopTest {
     }
 
     @Test
-    public void testOffloadingWrongVeicle() {
+    public void testOffloadingWrongVehicle() {
         CarWorkshop<Volvo240> volvoWorkshop = new CarWorkshop<>(5);
         volvoWorkshop.loadCar(new Volvo240());
 
+        //NOTE: the cast blow is expected to throw an exception.
+        //  that exception is more part of the language itself, however,
+        //  we assert that the code either crashes or won't compile.
         assertThrows(ClassCastException.class, () -> {
             Car fakeCar = new Scania();
-            volvoWorkshop.offloadCar((Volvo240) fakeCar);
+            //volvoWorkshop.offloadCar(fakeCar); // <-- this wont compile
+            volvoWorkshop.offloadCar((Volvo240) fakeCar); // <-- this always throws an error
         });
     }
 }

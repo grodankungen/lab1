@@ -2,7 +2,7 @@ package src;
 
 import java.util.ArrayList;
 
-public class CarWorkshop<T extends Car> implements Unloadable {
+public class CarWorkshop<T extends Car> implements Unloadable<T> {
     private CarStorage<T> carStorage;
 
     public CarWorkshop(int capacity) {
@@ -15,7 +15,7 @@ public class CarWorkshop<T extends Car> implements Unloadable {
     }
 
     public void offloadCar(T car) {
-        if(carStorage.getLoadedCars().isEmpty()) {
+        if (carStorage.getLoadedCars().isEmpty()) {
             System.out.println("The workshop is empty.");
             return;
         }
