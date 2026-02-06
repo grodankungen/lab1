@@ -64,9 +64,16 @@ class CarTransportTest extends GenericCarTest {
         assertEquals(prevSize, currSize);
     }
 
+    /**
+     * Tests that it isn't possible to load a car-transport on another car-transport
+     * (we don't support dangerous transport-stacking)
+     */
     @Test
     void attemptLoadingUnsupportedCar() {
         helper_load_some_cars(List.of(new CarTransport(10)));
+
+        int exp = 0;
+        assertEquals(exp, car.getAmountOfLoadedCars());
     }
 
     @Test
