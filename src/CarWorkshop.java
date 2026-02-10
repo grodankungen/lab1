@@ -14,12 +14,13 @@ public class CarWorkshop<T extends Car> implements HasCarStorage<T> {
         car.stopEngine();
     }
 
-    public void offloadCar(T car) {
+    public T offloadCar(T car) {
         if (carStorage.getLoadedCars().isEmpty()) {
             System.out.println("The workshop is empty.");
-            return;
+            return null;
         }
         carStorage.offloadCar(car);
+        return car;
     }
 
     public ArrayList<T> getLoadedCars() {

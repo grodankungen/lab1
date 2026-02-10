@@ -19,13 +19,15 @@ public class CarStorage<T extends Car> implements HasCarStorage<T> {
         }
     }
 
-    public void offloadCar() {
+    public T offloadCar() {
         if (loadedCars.isEmpty()) {
-            return;
+            return null;
         }
         int index = loadedCars.size() - 1;
         T t = loadedCars.remove(index);
         t.carIsOffloaded();
+
+        return t;
     }
 
     public void offloadCar(T car) {
