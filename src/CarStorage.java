@@ -14,7 +14,7 @@ public class CarStorage<T extends Car> implements HasCarStorage<T> {
     public void loadCar(T car) {
         if (loadedCars.size() < capacity) {
             loadedCars.add(car);
-            car.carIsLoaded();
+            car.setCarLoaded();
             car.stopEngine();
         }
     }
@@ -25,14 +25,14 @@ public class CarStorage<T extends Car> implements HasCarStorage<T> {
         }
         int index = loadedCars.size() - 1;
         T t = loadedCars.remove(index);
-        t.carIsOffloaded();
+        t.setCarOffloaded();
 
         return t;
     }
 
     public void offloadCar(T car) {
         loadedCars.remove(car);
-        car.carIsOffloaded();
+        car.setCarOffloaded();
     }
 
     public ArrayList<T> getLoadedCars() {

@@ -5,13 +5,13 @@ import java.awt.*;
 public abstract class Car extends Vehicle {
     private final int nrDoors;
     private final double enginePower;
-    private boolean isOnTransport;
+    private boolean isInCarStorage;
 
     public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
         super(currentSpeed, color, modelName);
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
-        this.isOnTransport = false;
+        this.isInCarStorage = false;
         stopEngine();
     }
 
@@ -24,7 +24,7 @@ public abstract class Car extends Vehicle {
     }
 
     public void gas(double amount) {
-        if (amount >= 0 && amount <= 1) {
+        if (!isInCarStorage && amount >= 0 && amount <= 1) {
             incrementSpeed(amount);
         }
     }
@@ -62,23 +62,23 @@ public abstract class Car extends Vehicle {
 
     @Override
     protected void setPosition(double x, double y) {
-        if (isOnTransport) {
+        if (isInCarStorage) {
             super.setPosition(x, y);
         }
     }
 
     @Override
     public void move() {
-        if (!isOnTransport) {
+        if (!isInCarStorage) {
             super.move();
         }
     }
 
-    public void carIsLoaded() {
-        isOnTransport = true;
+    public void setCarLoaded() {
+        isInCarStorage = true;
     }
 
-    public void carIsOffloaded() {
-        isOnTransport = false;
+    public void setCarOffloaded() {
+        isInCarStorage = false;
     }
 }
