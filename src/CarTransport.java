@@ -32,10 +32,12 @@ public class CarTransport extends Truck implements HasCarStorage<Car> {
         }
     }
 
-    public void offloadCar() {
+    public Car offloadCar() {
         if (!isCargoInResetPosition()) {  // can't offload car if ramp is not lowered
-            carStorage.offloadCar();
+            return carStorage.offloadCar();
         }
+
+        return null;
     }
 
     public ArrayList<Car> getLoadedCars() {

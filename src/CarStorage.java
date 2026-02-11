@@ -30,9 +30,11 @@ public class CarStorage<T extends Car> implements HasCarStorage<T> {
         return t;
     }
 
-    public void offloadCar(T car) {
+    public T offloadCar(T car) {
         loadedCars.remove(car);
         car.setCarOffloaded();
+
+        return car;
     }
 
     public ArrayList<T> getLoadedCars() {

@@ -11,6 +11,18 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CarWorkshopTest {
 
     @Test
+    public void TestMultipleCars() {
+
+        CarWorkshop<Car> genericWorkshop = new CarWorkshop<>(3);
+
+        genericWorkshop.loadCar(new Scania());
+        genericWorkshop.loadCar(new Volvo240());
+        genericWorkshop.loadCar(new Saab95());
+
+        assertEquals(3, genericWorkshop.getAmountOfLoadedCars());
+    }
+
+    @Test
     public void testLoadingWrongVehicle() {
         CarWorkshop<Scania> scaniaWorkshop = new CarWorkshop<>(3);
 
