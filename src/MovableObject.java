@@ -1,6 +1,6 @@
 package src;
 
-abstract class MovableObject implements Movable {
+public abstract class MovableObject implements Movable {
     private double x;
     private double y;
     private double angle;
