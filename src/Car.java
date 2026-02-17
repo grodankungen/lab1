@@ -57,7 +57,7 @@ public abstract class Car extends Vehicle {
     }
 
     protected double speedFactor() {
-        return getEnginePower();
+        return getEnginePower() * 0.01;
     }
 
     @Override
