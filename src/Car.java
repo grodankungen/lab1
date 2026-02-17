@@ -16,7 +16,9 @@ public abstract class Car extends Vehicle {
     }
 
     public void startEngine() {
-        setCurrentSpeed(0.1);
+        if (getCurrentSpeed() == 0) {
+            setCurrentSpeed(0.1);
+        }
     }
 
     public void stopEngine() {
