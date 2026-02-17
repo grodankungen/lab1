@@ -7,8 +7,8 @@ public abstract class Car extends Vehicle {
     private final double enginePower;
     private boolean isInCarStorage;
 
-    public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName) {
-        super(currentSpeed, color, modelName);
+    public Car(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, int xCord, int yCord) {
+        super(currentSpeed, color, modelName, xCord, yCord);
         this.nrDoors = nrDoors;
         this.enginePower = enginePower;
         this.isInCarStorage = false;

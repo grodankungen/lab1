@@ -5,8 +5,8 @@ import java.awt.*;
 abstract class Truck extends Car {
     private final Cargo cargo;  // Can be either tip or ramp
 
-    public Truck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, Cargo cargo) {
-        super(nrDoors, enginePower, currentSpeed, color, modelName);
+    public Truck(int nrDoors, double enginePower, double currentSpeed, Color color, String modelName, Cargo cargo, int x, int y) {
+        super(nrDoors, enginePower, currentSpeed, color, modelName, x, y);
         this.cargo = cargo;
     }
 

@@ -7,7 +7,12 @@ public class CarTransport extends Truck implements HasCarStorage<Car> {
     private CarStorage<Car> carStorage;
 
     public CarTransport(int capacity) {
-        super(2, 67, 0, Color.white, "The ULTIMATE Biltransport", new RampCargo());
+        super(2, 67, 0, Color.white, "The ULTIMATE Biltransport", new RampCargo(), 0, 0);
+        carStorage = new CarStorage<>(capacity);
+    }
+
+    public CarTransport(int capacity, int x, int y) {
+        super(2, 67, 0, Color.white, "The ULTIMATE Biltransport", new RampCargo(), x, y);
         carStorage = new CarStorage<>(capacity);
     }
 
