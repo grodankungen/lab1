@@ -41,6 +41,7 @@ class CarTransportTest extends GenericCarTest {
             volvo.gas(1);
         }
 
+
         //load while raising ramp
         helper_load_some_cars(List.of(volvo, new Saab95()));
         int currSize = car.getAmountOfLoadedCars();
