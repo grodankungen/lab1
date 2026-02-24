@@ -27,4 +27,3 @@ public class CarWorkshop<T extends Car> implements HasCarStorage<T> {
         return new ArrayList<>(carStorage.getLoadedCars());
     }
 }
-
