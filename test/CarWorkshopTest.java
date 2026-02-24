@@ -3,6 +3,7 @@ package test;
 import org.junit.jupiter.api.Test;
 import src.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +14,7 @@ public class CarWorkshopTest {
     @Test
     public void TestMultipleCars() {
 
-        CarWorkshop<Car> genericWorkshop = new CarWorkshop<>(3);
+        CarWorkshop<Car> genericWorkshop = new CarWorkshop<>(3, new Point(0, 0));
 
         genericWorkshop.loadCar(new Scania());
         genericWorkshop.loadCar(new Volvo240());
@@ -24,7 +25,7 @@ public class CarWorkshopTest {
 
     @Test
     public void testLoadingWrongVehicle() {
-        CarWorkshop<Scania> scaniaWorkshop = new CarWorkshop<>(3);
+        CarWorkshop<Scania> scaniaWorkshop = new CarWorkshop<>(3, new Point(0, 0));
 
         //We expect this lambda func to crash, indicating we couldn't load
         //  an incompatible vehicle.
@@ -39,7 +40,7 @@ public class CarWorkshopTest {
 
     @Test
     public void testOverloadingWorkshop() {
-        CarWorkshop<Car> carWorkshop = new CarWorkshop<>(5);
+        CarWorkshop<Car> carWorkshop = new CarWorkshop<>(5, new Point(0, 0));
         for (int i = 0; i < 10; i++) {
             carWorkshop.loadCar(new Volvo240());
         }
@@ -49,14 +50,14 @@ public class CarWorkshopTest {
 
     @Test
     public void testOffloadingEmptyWorkshop() {
-        CarWorkshop<Car> carWorkshop = new CarWorkshop<>(5);
+        CarWorkshop<Car> carWorkshop = new CarWorkshop<>(5, new Point(0, 0));
         carWorkshop.offloadCar(new Volvo240());
         assertEquals(0, carWorkshop.getAmountOfLoadedCars());
     }
 
     @Test
     public void testOffloadingWrongVehicle() {
-        CarWorkshop<Volvo240> volvoWorkshop = new CarWorkshop<>(5);
+        CarWorkshop<Volvo240> volvoWorkshop = new CarWorkshop<>(5, new Point(0, 0));
         volvoWorkshop.loadCar(new Volvo240());
 
         //NOTE: the cast blow is expected to throw an exception.
