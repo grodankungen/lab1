@@ -12,7 +12,7 @@ public class CarStorage<T extends Car> implements HasCarStorage<T> {
     }
 
     public void loadCar(T car) {
-        if (loadedCars.size() < capacity) {
+        if (loadedCars.size() < capacity && !loadedCars.contains(car)) {
             loadedCars.add(car);
             car.setCarLoaded();
             car.stopEngine();
